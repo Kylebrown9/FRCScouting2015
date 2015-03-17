@@ -4,7 +4,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 
 public class PostMatchPanel extends JPanel {
@@ -13,7 +12,7 @@ public class PostMatchPanel extends JPanel {
 	JSlider coop;
 	JSlider rigid;
 	JTextArea comments;
-	JTextField score;
+	//JTextField score;
 	JLabel[] prompts = new JLabel[4];
 	
 	public PostMatchPanel() {	
@@ -31,7 +30,7 @@ public class PostMatchPanel extends JPanel {
 			
 		comments = new JTextArea();
 	
-		score = new JTextField();
+		//score = new JTextField();
 		//
 		SpringLayout layout = new SpringLayout();
         this.setLayout(layout);
@@ -39,8 +38,8 @@ public class PostMatchPanel extends JPanel {
 		this.add(coop);
         this.add(prompts[1] = new JLabel("How rigid was their robot"));
 		this.add(rigid);
-		this.add(prompts[2] = new JLabel("Final Match Score for your alliance"));
-        this.add(score);
+//		this.add(prompts[2] = new JLabel("Final Match Score for your alliance"));
+//      this.add(score);
         this.add(prompts[3] = new JLabel("Comments:"));
 		this.add(comments);
 		
@@ -62,16 +61,16 @@ public class PostMatchPanel extends JPanel {
         layout.putConstraint(SpringLayout.WEST, rigid, 0, SpringLayout.WEST, this);
         
         //Score
-        layout.putConstraint(SpringLayout.NORTH, prompts[2], 30, SpringLayout.SOUTH, rigid);
-        layout.putConstraint(SpringLayout.WEST, prompts[2], 0, SpringLayout.WEST, this);
-               
-        layout.putConstraint(SpringLayout.NORTH, score, 0, SpringLayout.SOUTH, prompts[2]);
+//        layout.putConstraint(SpringLayout.NORTH, prompts[2], 30, SpringLayout.SOUTH, rigid);
+//        layout.putConstraint(SpringLayout.WEST, prompts[2], 0, SpringLayout.WEST, this);
+//               
+//        layout.putConstraint(SpringLayout.NORTH, score, 0, SpringLayout.SOUTH, prompts[2]);
 //        layout.putConstraint(SpringLayout.SOUTH, comments, 250, SpringLayout.SOUTH, prompts[2]);
-        layout.putConstraint(SpringLayout.EAST, score, 500, SpringLayout.WEST, score);
-        layout.putConstraint(SpringLayout.WEST, score, 0, SpringLayout.WEST, this);
+//        layout.putConstraint(SpringLayout.EAST, score, 500, SpringLayout.WEST, score);
+//        layout.putConstraint(SpringLayout.WEST, score, 0, SpringLayout.WEST, this);
         
         //comments
-        layout.putConstraint(SpringLayout.NORTH, prompts[3], 30, SpringLayout.SOUTH, score);
+        layout.putConstraint(SpringLayout.NORTH, prompts[3], 30, SpringLayout.SOUTH, rigid);
         layout.putConstraint(SpringLayout.WEST, prompts[3], 0, SpringLayout.WEST, this);
                
         layout.putConstraint(SpringLayout.NORTH, comments, 0, SpringLayout.SOUTH, prompts[3]);
@@ -85,7 +84,7 @@ public class PostMatchPanel extends JPanel {
 		
 		summaryBuilder.append("|Cooperation: " + coop.getValue() + ' ');
 		summaryBuilder.append("|Rigidity: " + rigid.getValue() + ' ');
-		summaryBuilder.append("|MP: " + score.getText() + ' ');
+		//summaryBuilder.append("|MP: " + score.getText() + ' ');
 		summaryBuilder.append("|Comments2: " + comments.getText() + ' ');
 		
 		return summaryBuilder.toString();
@@ -94,7 +93,7 @@ public class PostMatchPanel extends JPanel {
 	public void reset() {
 		coop.setValue(5);
 		rigid.setValue(5);
-		score.setText("");
+//		score.setText("");
 		comments.setText("");
 	}
 }
