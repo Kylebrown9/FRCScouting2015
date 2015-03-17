@@ -1,7 +1,5 @@
 package surveyPanels;
 
-//import java.awt.Container;
-
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -144,13 +142,3 @@ public class AutoPanel extends JPanel {
 		autoMove.clearSelection();
 	}
 }
-
-/*layout.putConstraint(SpringLayout.NORTH, prompts[4], 0, SpringLayout.SOUTH, totes);
-//layout.putConstraint(SpringLayout.SOUTH, prompts[1], 0, SpringLayout.SOUTH, this);
-//layout.putConstraint(SpringLayout.EAST, prompts[1], 0, SpringLayout.EAST, this);
-layout.putConstraint(SpringLayout.WEST, prompts[4], 0, SpringLayout.WEST, this);
-       
-layout.putConstraint(SpringLayout.NORTH, comments, 0, SpringLayout.SOUTH, prompts[4]);
-layout.putConstraint(SpringLayout.SOUTH, comments, 0, SpringLayout.SOUTH, prompts[4]);
-layout.putConstraint(SpringLayout.EAST, comments, 500, SpringLayout.WEST, totesStacked);
-layout.putConstraint(SpringLayout.WEST, comments, 0, SpringLayout.WEST, this);*/

@@ -2,13 +2,11 @@ package infoPanel;
 
 import java.awt.GridLayout;
 
-//import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-//import javax.swing.SpringLayout;
 
 public class ManualInfoPanel extends JPanel {
 

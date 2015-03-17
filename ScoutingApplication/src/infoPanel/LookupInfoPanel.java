@@ -87,9 +87,9 @@ public class LookupInfoPanel extends JPanel implements ActionListener {
 		Color c;
 		
 		switch(allianceColor) {
-		case "BLUE": c = Color.BLUE; break;
-		case "RED": c = Color.RED; break;
-		default: c = Color.RED;
+			case "BLUE": c = Color.BLUE; break;
+			case "RED": c = Color.RED; break;
+			default: c = Color.RED;
 		}
 		
 		outputAlliance.setColor(c);
