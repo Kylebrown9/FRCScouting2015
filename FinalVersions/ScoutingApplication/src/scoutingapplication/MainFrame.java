@@ -115,6 +115,7 @@ public class MainFrame extends JFrame implements ChangeListener {
 		aP.reset();
 		try {
 			tP.reset();
+			cP.reset();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

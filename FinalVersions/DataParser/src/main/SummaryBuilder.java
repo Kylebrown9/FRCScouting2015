@@ -8,7 +8,10 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -17,9 +20,16 @@ public class SummaryBuilder {
 
 	public static String[] stackNames = {"Stack0","Stack1","Stack2","Stack3","Stack4","Stack5","Stack6","Stack7"};
 	
-	public static void makeSummary(String teamNum) {
+	public static void makeSummary(String teamNum, String config) {
 		
-		List<String> stringData = getFiles(teamNum);
+		List<String> stringData;
+		if(teamNum.equals(""))
+		{
+			stringData = getFiles();
+			teamNum = "";
+		}
+		else
+			stringData = getFiles(teamNum);
 		
 		String[] temp;
 		Map<String,String> fields = new TreeMap<String, String>();
@@ -36,11 +46,12 @@ public class SummaryBuilder {
 					fields.put(temp[j].split(":")[0],temp[j].split(":")[1]);
 			}
 			
-			output.append(getSummary(fields));
+			output.append(getSummary(fields,config));
 			output.append(System.lineSeparator());
 		}
 		
-		stringToCSV(teamNum,output.toString());
+		DateFormat dF = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+		stringToCSV(teamNum + "_" + dF.format(new Date()),output.toString());
 	}
 	
 //	public static List<String> getFiles(Date start, Date end, String teamNum) {
@@ -61,7 +72,7 @@ public class SummaryBuilder {
 		
 		System.err.println(teamNum);
 		for(int i=0;i<matchFiles.length;i++) {
-			if(matchFiles[i].getName().contains("T" + teamNum)){
+			if(matchFiles[i].getName().contains("T" + teamNum + "M")){
 				stringData.add(fileToString(matchFiles[i].getName()));	
 			}
 		}
@@ -79,36 +90,60 @@ public class SummaryBuilder {
 		
 		for(int i=0;i<matchFiles.length;i++) {
 			stringData.add(fileToString(matchFiles[i].getName()));
+//			matchFiles[i].renameTo(new File(data.getAbsolutePath()+ "\\" + matchFiles[i].getName().replace(' ', '_')));
 		}
 		
 		return stringData;
 	}
 	
-	public static String getSummary(Map<String,String> fields) {
+	public static String getSummary(Map<String,String> fields, String config) {
 		StringBuilder output = new StringBuilder();
 		
 		//Team Number
-		output.append(fields.get("T"));
-		output.append(",");
+		if(config.charAt(0) == '1') {
+			output.append(fields.get("T"));
+			output.append(",");
+		}
 		
 		//Match Number
-		output.append(fields.get("M"));
-		output.append(",");
+		if(config.charAt(1) == '1') {
+			output.append(fields.get("M"));
+			output.append(",");
+		}
 		
 		//Totes
-		output.append(countItem(fields,"2"));
-		output.append(",");
+		if(config.charAt(2) == '1') {
+			output.append(countItem(fields,"2"));
+			output.append(",");
+		}
 		
 		//Containers
-		output.append(countItem(fields,"6"));
-		output.append(",");
+		if(config.charAt(3) == '1') {
+			output.append(countItem(fields,"6"));
+			output.append(",");
+		}
 		
 		//Max stack height
-		output.append(maxHeight(fields));
-		output.append(",");
+		if(config.charAt(4) == '1') {
+			output.append(maxHeight(fields));
+			output.append(",");
+		}
 		
+		//Raw Stack Data
+		if(config.charAt(5) == '1') {
+			for(int i=0; i<stackNames.length; i++) {
+				output.append(fields.get(stackNames[i]));
+				output.append(",");
+			}
+		}
+		
+		//Comments
+		if(config.charAt(6) == '1') {
+			output.append("C1: " + fields.get("Comments1").replace(',', ' '));
+			output.append("C2: " + fields.get("Comments2").replace('.', ' '));
+		}
 		//Match Points
-		output.append(fields.get("MP"));
+		//output.append(fields.get("MP"));
 		
 		return output.toString();
 	} 

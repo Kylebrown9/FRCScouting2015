@@ -21,6 +21,6 @@ public class Main {
 	}
 	
 	public void compile() {
-		SummaryBuilder.makeSummary(mF.getTeam());
+		SummaryBuilder.makeSummary(mF.getTeam(),mF.getConfig());
 	}
 }
